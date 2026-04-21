@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ilham Hafizt | Sales Performance Dashboard</title>
+    <link rel="shortcut icon" href="assets/shortcut.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/project1.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" >
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        serif: ['DM Serif Display', 'serif'],
+                    },
+                    colors: {
+                        g: {
+                            50:  '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        db: {
+                            bg:      '#1a1f2e',
+                            card:    '#252d3d',
+                            border:  '#2d3748',
+                            border2: '#374151',
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-g-50 text-g-900 font-sans">
+    <!-- Scroll Progress -->
+    <div id="progress-bar"></div>
+
+    <!-- === NAVBAR === -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+        <div class="max-w-[1152px] mx-auto w-full flex items-center justify-between gap-3">
+            <a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/" class="font-serif text-[1.1rem] text-g-700 no-underline whitespace-nowrap flex-shrink-0" target="_blank">
+                Ilham Hafizt<span class="text-g-400">.</span>
+            </a>
+            <div class="flex items-center gap-2.5">
+                <div class="flex items-center bg-g-50 border-[1.5px] border-g-200 rounded-full py-0.5 px-1 gap-0.5">
+                    <button id="btn-id" onclick="setLang('id')" class="lang-btn active text-[0.72rem] font-bold py-[3px] px-2.5 rounded-full border-none cursor-pointer transition-all duration-200 tracking-[0.04em]">ID</button>
+                    <button id="btn-en" onclick="setLang('en')" class="lang-btn text-[0.72rem] font-bold py-[3px] px-2.5 rounded-full border-none cursor-pointer transition-all duration-200 tracking-[0.04em]">EN</button>
+                </div>
+                <a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/" target="_blank" class="flex items-center gap-1.5 text-g-700 text-[0.8rem] font-semibold no-underline bg-g-50 border-[1.5px] border-g-200 py-[5px] px-[14px] rounded-full hover:bg-g-100 transition-colors duration-200 whitespace-nowrap">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    <span class="max-[440px]:hidden" data-id="Kembali ke Portfolio" data-en="Back to Portfolio">Kembali ke Portfolio</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- === HERO === -->
+    <div class="hero-gradient pt-[94px] pb-12 px-4 border-b border-g-200">
+        <div class="max-w-[1152px] mx-auto">
+            <span class="inline-block bg-g-100 text-g-700 text-[0.68rem] font-bold tracking-[0.05em] uppercase py-1 px-3 rounded-full mb-3.5" data-id="Project — Data Analyst" data-en="Project — Data Analyst">Project — Data Analyst</span>
+            <h1 class="font-serif hero-title text-g-900 leading-[1.15] mb-3.5 max-w-[680px]">Sales Performance Dashboard</h1>
+            <p class="hero-desc text-[#4a6355] max-w-[600px] leading-[1.7] mb-5" data-id="Analisis end-to-end kinerja penjualan 1.806 transaksi — mulai dari data cleaning dengan Python, query SQL Server, hingga dashboard interaktif di Looker Studio yang membantu tim bisnis membuat keputusan berbasis data." data-en="End-to-end analysis of 1,806 sales transactions — from Python data cleaning and SQL Server queries to an interactive Looker Studio dashboard that helps business teams make data-driven decisions.">
+                Analisis end-to-end kinerja penjualan 1.806 transaksi — mulai dari data cleaning dengan Python, query SQL Server, hingga dashboard interaktif di Looker Studio yang membantu tim bisnis membuat keputusan berbasis data.
+            </p>
+            <div class="flex flex-wrap gap-[7px]">
+                <span class="inline-block bg-white border-[1.5px] border-g-200 text-g-700 text-[0.72rem] font-semibold py-[3px] px-[11px] rounded-full">🐍 Python</span>
+                <span class="inline-block bg-white border-[1.5px] border-g-200 text-g-700 text-[0.72rem] font-semibold py-[3px] px-[11px] rounded-full">Pandas</span>
+                <span class="inline-block bg-white border-[1.5px] border-g-200 text-g-700 text-[0.72rem] font-semibold py-[3px] px-[11px] rounded-full">🗄️ SQL</span>
+                <span class="inline-block bg-white border-[1.5px] border-g-200 text-g-700 text-[0.72rem] font-semibold py-[3px] px-[11px] rounded-full">📊 Looker Studio</span>
+                <span class="inline-block bg-white border-[1.5px] border-g-200 text-g-700 text-[0.72rem] font-semibold py-[3px] px-[11px] rounded-full">🧹 Data Cleaning</span>
+                <span class="inline-block bg-white border-[1.5px] border-g-200 text-g-700 text-[0.72rem] font-semibold py-[3px] px-[11px] rounded-full">📈 Dashboard</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- === MAIN CONTENT === -->
+    <div class="max-w-[1152px] mx-auto px-4 py-12 pb-24">
+        <div class="grid grid-cols-1 min-[860px]:grid-cols-[1fr_300px] gap-9 items-start">
+            <!-- Left: Main Column -->
+            <div class="flex flex-col gap-9 min-w-0 order-1">
+                <!-- Dashboard Mockup -->
+                <div>
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-500 mb-2" data-id="Visualisasi" data-en="Visualization">Visualization</span>
+                    <div class="font-serif sec-title text-g-900 mb-3.5">Sales Performance Dashboard</div>
+                    <div class="bg-db-bg rounded-[14px] overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.22)] border border-db-border">
+                        <!-- Topbar -->
+                        <div class="bg-db-card px-3.5 py-2.5 flex items-center gap-1.5 border-b border-db-border2 overflow-hidden">
+                            <div class="w-[9px] h-[9px] rounded-full bg-[#f87171] flex-shrink-0"></div>
+                            <div class="w-[9px] h-[9px] rounded-full bg-[#fbbf24] flex-shrink-0"></div>
+                            <div class="w-[9px] h-[9px] rounded-full bg-[#4ade80] flex-shrink-0"></div>
+                            <span class="db-truncate text-[#9ca3af] text-[0.68rem] ml-1.5">🔍 Looker Studio — Sales Performance Dashboard | Ilham Hafizt</span>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="p-[clamp(12px,3vw,20px)]">
+                            <div class="flex justify-between items-start gap-3 mb-4 flex-wrap">
+                                <div>
+                                    <div class="text-white text-[clamp(0.85rem,2vw,1rem)] font-bold">📊 Sales Performance Dashboard</div>
+                                    <div class="text-[#6b7280] text-[0.65rem] mt-0.5" data-id="Data: Jan 2023 – Des 2025 &nbsp;|&nbsp; 1.806 Transaksi" data-en="Data: Jan 2023 – Dec 2025 &nbsp;|&nbsp; 1,806 Transactions">
+                                        Data: Jan 2023 – Des 2025 &nbsp;|&nbsp; 1.806 Transaksi
+                                    </div>
+                                </div>
+                                <div class="flex gap-1.5 flex-wrap">
+                                    <button class="bg-g-800 text-g-400 border border-g-500 text-[0.62rem] py-[3px] px-[9px] rounded-[5px] cursor-pointer whitespace-nowrap">2023–2025</button>
+                                    <button class="bg-db-border text-[#9ca3af] border border-db-border2 text-[0.62rem] py-[3px] px-[9px] rounded-[5px] cursor-pointer whitespace-nowrap" data-id="Online" data-en="Online">Online</button>
+                                    <button class="bg-db-border text-[#9ca3af] border border-db-border2 text-[0.62rem] py-[3px] px-[9px] rounded-[5px] cursor-pointer whitespace-nowrap" data-id="Semua Wilayah" data-en="All Regions">Semua Wilayah</button>
+                                </div>
+                            </div>
+
+                            <!-- KPI -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-3.5">
+                                <div class="bg-db-card rounded-[9px] p-3 border border-db-border">
+                                    <div class="text-[#6b7280] text-[0.58rem] uppercase tracking-[0.04em] mb-[5px]" data-id="Total Net Sales" data-en="Total Net Sales">Total Net Sales</div>
+                                    <div class="kpi-val text-white font-bold leading-[1.2]">Rp 835,8M</div>
+                                    <div class="text-[0.6rem] mt-1 text-g-400">↑ +12.4% YoY</div>
+                                </div>
+                                <div class="bg-db-card rounded-[9px] p-3 border border-db-border">
+                                    <div class="text-[#6b7280] text-[0.58rem] uppercase tracking-[0.04em] mb-[5px]" data-id="Total Orders" data-en="Total Orders">Total Orders</div>
+                                    <div class="kpi-val text-white font-bold leading-[1.2]">1.806</div>
+                                    <div class="text-[0.6rem] mt-1 text-g-400">↑ +8.1% YoY</div>
+                                </div>
+                                <div class="bg-db-card rounded-[9px] p-3 border border-db-border">
+                                    <div class="text-[#6b7280] text-[0.58rem] uppercase tracking-[0.04em] mb-[5px]" data-id="Avg Rating" data-en="Avg Rating">Avg Rating</div>
+                                    <div class="kpi-val text-white font-bold leading-[1.2]">3.00 ⭐</div>
+                                    <div class="text-[0.6rem] mt-1 text-[#9ca3af]" data-id="— stabil" data-en="— stable">— stabil</div>
+                                </div>
+                                <div class="bg-db-card rounded-[9px] p-3 border border-db-border">
+                                    <div class="text-[#6b7280] text-[0.58rem] uppercase tracking-[0.04em] mb-[5px]" data-id="Discount Rate" data-en="Discount Rate">Discount Rate</div>
+                                    <div class="kpi-val text-white font-bold leading-[1.2]">13.6%</div>
+                                    <div class="text-[0.6rem] mt-1 text-[#f87171]" data-id="↓ -0.8% vs target" data-en="↓ -0.8% vs target">↓ -0.8% vs target</div>
+                                </div>
+                            </div>
+
+                            <!-- Charts row 1 -->
+                            <div class="grid grid-cols-1 min-[560px]:grid-cols-2 gap-3 mb-3">
+                                <div class="bg-db-card rounded-[9px] p-3 border border-db-border overflow-hidden">
+                                    <div class="text-[#d1d5db] text-[0.68rem] font-semibold mb-2.5" data-id="📈 Tren Net Sales Bulanan (2025)" data-en="📈 Monthly Net Sales Trend (2025)">📈 Tren Net Sales Bulanan (2025)</div>
+                                    <div class="chart-wrap"><canvas id="lineChart"></canvas></div>
+                                </div>
+                                <div class="bg-db-card rounded-[9px] p-3 border border-db-border overflow-hidden">
+                                    <div class="text-[#d1d5db] text-[0.68rem] font-semibold mb-2.5" data-id="🍩 Distribusi Kategori" data-en="🍩 Category Distribution">🍩 Distribusi Kategori</div>
+                                    <div class="chart-wrap"><canvas id="donutChart"></canvas></div>
+                                </div>
+                            </div>
+
+                            <!-- Charts row 2 -->
+                            <div class="grid grid-cols-1 min-[560px]:grid-cols-[1.6fr_1fr] gap-3">
+                                <div class="bg-db-card rounded-[9px] p-3 border border-db-border overflow-hidden">
+                                    <div class="text-[#d1d5db] text-[0.68rem] font-semibold mb-2.5" data-id="🏆 Top 5 Produk by Net Sales" data-en="🏆 Top 5 Products by Net Sales">🏆 Top 5 Produk by Net Sales</div>
+                                    <div class="chart-wrap"><canvas id="barChart"></canvas></div>
+                                </div>
+                                <div class="bg-db-card rounded-[9px] p-3 border border-db-border overflow-hidden">
+                                    <div class="text-[#d1d5db] text-[0.68rem] font-semibold mb-2.5" data-id="📍 Sales by Region" data-en="📍 Sales by Region">📍 Sales by Region</div>
+                                    <div class="mt-1">
+                                        <div class="mb-[7px]"><div class="flex justify-between text-[0.6rem] text-[#9ca3af] mb-[3px]"><span>Jawa Barat</span><span>21.3%</span></div><div class="bg-[#374151] rounded h-[5px]"><div class="h-full rounded bg-g-400" style="width:100%"></div></div></div>
+                                        <div class="mb-[7px]"><div class="flex justify-between text-[0.6rem] text-[#9ca3af] mb-[3px]"><span>Jawa Timur</span><span>20.7%</span></div><div class="bg-[#374151] rounded h-[5px]"><div class="h-full rounded bg-g-400" style="width:97%"></div></div></div>
+                                        <div class="mb-[7px]"><div class="flex justify-between text-[0.6rem] text-[#9ca3af] mb-[3px]"><span>DKI Jakarta</span><span>19.8%</span></div><div class="bg-[#374151] rounded h-[5px]"><div class="h-full rounded bg-g-500" style="width:93%"></div></div></div>
+                                        <div class="mb-[7px]"><div class="flex justify-between text-[0.6rem] text-[#9ca3af] mb-[3px]"><span>Bali</span><span>9.6%</span></div><div class="bg-[#374151] rounded h-[5px]"><div class="h-full rounded bg-g-600" style="width:45%"></div></div></div>
+                                        <div class="mb-[7px]"><div class="flex justify-between text-[0.6rem] text-[#9ca3af] mb-[3px]"><span>Sulawesi Selatan</span><span>9.6%</span></div><div class="bg-[#374151] rounded h-[5px]"><div class="h-full rounded bg-g-700" style="width:45%"></div></div></div>
+                                        <div class="mb-[7px]"><div class="flex justify-between text-[0.6rem] text-[#9ca3af] mb-[3px]"><span>Kalimantan Timur</span><span>9.5%</span></div><div class="bg-[#374151] rounded h-[5px]"><div class="h-full rounded bg-g-800" style="width:44%"></div></div></div>
+                                        <div class="mb-[7px]"><div class="flex justify-between text-[0.6rem] text-[#9ca3af] mb-[3px]"><span>Sumatera Utara</span><span>9.0%</span></div><div class="bg-[#374151] rounded h-[5px]"><div class="h-full rounded bg-g-800" style="width:42%"></div></div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Leaderboard -->
+                            <div class="bg-db-card rounded-[9px] p-3 border border-db-border mt-3 overflow-x-auto">
+                                <div class="text-[#d1d5db] text-[0.68rem] font-semibold mb-2.5" data-id="👤 Leaderboard Salesperson" data-en="👤 Salesperson Leaderboard">👤 Leaderboard Salesperson</div>
+                                <table class="w-full border-collapse text-[0.64rem]">
+                                    <thead><tr>
+                                        <th class="text-[#6b7280] text-left py-[5px] px-[7px] border-b border-db-border2 whitespace-nowrap" data-id="Rank" data-en="Rank">Rank</th>
+                                        <th class="text-[#6b7280] text-left py-[5px] px-[7px] border-b border-db-border2 whitespace-nowrap" data-id="Salesperson" data-en="Salesperson">Salesperson</th>
+                                        <th class="text-[#6b7280] text-left py-[5px] px-[7px] border-b border-db-border2 whitespace-nowrap max-[480px]:hidden" data-id="Orders" data-en="Orders">Orders</th>
+                                        <th class="text-[#6b7280] text-left py-[5px] px-[7px] border-b border-db-border2 whitespace-nowrap" data-id="Net Sales" data-en="Net Sales">Net Sales</th>
+                                        <th class="text-[#6b7280] text-left py-[5px] px-[7px] border-b border-db-border2 whitespace-nowrap" data-id="Rating" data-en="Rating">Rating</th>
+                                    </tr></thead>
+                                    <tbody>
+                                        <tr><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border"><span class="bg-[#14532d] text-g-400 font-bold rounded py-[1px] px-[5px] text-[0.6rem]">#1</span></td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border">Ahmad Fauzi</td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border max-[480px]:hidden">~185</td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border">Rp 216,6M</td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border">⭐ 3.0</td></tr>
+                                        <tr><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border"><span class="bg-[#14532d] text-g-400 font-bold rounded py-[1px] px-[5px] text-[0.6rem]">#2</span></td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border">Budi Santoso</td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border max-[480px]:hidden">~170</td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border">Rp 166,5M</td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border">⭐ 3.0</td></tr>
+                                        <tr><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border"><span class="bg-[#14532d] text-g-400 font-bold rounded py-[1px] px-[5px] text-[0.6rem]">#3</span></td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border">Nurul Hidayah</td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border max-[480px]:hidden">~165</td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border">Rp 139,8M</td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border">⭐ 3.1</td></tr>
+                                        <tr><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border"><span class="bg-[#14532d] text-g-400 font-bold rounded py-[1px] px-[5px] text-[0.6rem]">#4</span></td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border">Siti Rahayu</td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border max-[480px]:hidden">~150</td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border">Rp 99,3M</td><td class="text-[#d1d5db] py-[5px] px-[7px] border-b border-db-border">⭐ 3.0</td></tr>
+                                        <tr><td class="text-[#d1d5db] py-[5px] px-[7px]"><span class="bg-[#14532d] text-g-400 font-bold rounded py-[1px] px-[5px] text-[0.6rem]">#5</span></td><td class="text-[#d1d5db] py-[5px] px-[7px]">Riko Pratama</td><td class="text-[#d1d5db] py-[5px] px-[7px] max-[480px]:hidden">~145</td><td class="text-[#d1d5db] py-[5px] px-[7px]">Rp 98,4M</td><td class="text-[#d1d5db] py-[5px] px-[7px]">⭐ 2.9</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="text-center mt-3 pt-2.5 border-t border-db-border">
+                                <span class="text-[0.6rem] text-[#4b5563]" data-id="Powered by Looker Studio · Data Source: SQL Server · Last updated: Des 2025" data-en="Powered by Looker Studio · Data Source: SQL Server · Last updated: Dec 2025">
+                                    Powered by Looker Studio · Data Source: SQL Server · Last updated: Des 2025
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2.5 bg-g-50 border border-g-200 rounded-[10px] p-3 px-3.5 mt-3 text-[0.78rem] text-[#6b9478] leading-[1.55]">
+                        <span>ℹ️</span>
+                        <span data-id="Dashboard di atas merepresentasikan tampilan Looker Studio. Untuk versi interaktif sesungguhnya, import <code class='bg-g-100 px-[5px] py-[1px] rounded text-[0.73rem]'>sales_data_clean.csv</code> ke Google Looker Studio." data-en="The dashboard above represents the Looker Studio interface. For the fully interactive version, import <code class='bg-g-100 px-[5px] py-[1px] rounded text-[0.73rem]'>sales_data_clean.csv</code> into Google Looker Studio.">
+                            Dashboard di atas merepresentasikan tampilan Looker Studio. Untuk versi interaktif sesungguhnya, import <code class="bg-g-100 px-[5px] py-[1px] rounded text-[0.73rem]">sales_data_clean.csv</code> ke Google Looker Studio.
+                        </span>
+                    </div>                    
+                </div>
+                
+                <!-- Workflow -->
+                <div class="bg-white rounded-2xl border-[1.5px] border-g-200 p-[clamp(16px,4vw,28px)] shadow-[0_2px_12px_rgba(20,83,45,0.05)]">
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-500 mb-2" data-id="Alur Kerja" data-en="Workflow">Alur Kerja</span>
+                    <div class="font-serif sec-title text-g-900 mb-3.5" data-id="Project Workflow" data-en="Project Workflow">Project Workflow</div>
+                    <div class="flex flex-col">
+                        <div class="flex gap-4 pb-6">
+                            <div class="flex flex-col items-center flex-shrink-0">
+                                <div class="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-g-400 to-g-500 flex items-center justify-center text-g-900 font-extrabold text-[0.78rem]">1</div>
+                                <div class="w-0.5 flex-1 bg-g-200 mt-1.5"></div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.88rem] mb-1" data-id="Dataset Generation & Identifikasi Masalah" data-en="Dataset Generation & Problem Identification">Dataset Generation & Identifikasi Masalah</div>
+                                <div class="text-[#5a7a65] text-[0.8rem] leading-[1.65]" data-id="Dataset sintetis 2.500 baris dibuat dengan sengaja memiliki <em>dirty data</em>: duplikat, format tanggal tidak konsisten, nilai negatif, karakter non-numerik, dan inkonsistensi kapitalisasi." data-en="A synthetic dataset of 2,500 rows was intentionally created with <em>dirty data</em>: duplicates, inconsistent date formats, negative values, non-numeric characters, and capitalization inconsistencies.">
+                                    Dataset sintetis 2.500 baris dibuat dengan sengaja memiliki <em>dirty data</em>: duplikat, format tanggal tidak konsisten, nilai negatif, karakter non-numerik, dan inkonsistensi kapitalisasi.
+                                </div>
+                                <span class="inline-block bg-g-50 text-g-600 text-[0.62rem] font-bold py-[2px] px-2 rounded mt-1.5 border border-g-200">🐍 Python · random · csv</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 pb-6">
+                            <div class="flex flex-col items-center flex-shrink-0">
+                                <div class="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-g-400 to-g-500 flex items-center justify-center text-g-900 font-extrabold text-[0.78rem]">2</div>
+                                <div class="w-0.5 flex-1 bg-g-200 mt-1.5"></div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.88rem] mb-1" data-id="Data Cleaning dengan Python & Pandas" data-en="Data Cleaning with Python & Pandas">Data Cleaning dengan Python & Pandas</div>
+                                <div class="text-[#5a7a65] text-[0.8rem] leading-[1.65]" data-id="Script <code class='bg-g-50 px-[5px] py-[1px] rounded text-[0.75rem]'>data_cleaning.py</code> membersihkan 10 duplikat, 247 tanggal invalid, 193 harga kotor, 244 qty tidak valid. Output: <strong>1.806 baris bersih</strong> + kolom turunan." data-en="The script <code class='bg-g-50 px-[5px] py-[1px] rounded text-[0.75rem]'>data_cleaning.py</code> removed 10 duplicates, 247 invalid dates, 193 dirty prices, and 244 invalid quantities. Output: <strong>1,806 clean rows</strong> + derived columns.">
+                                    Script <code class="bg-g-50 px-[5px] py-[1px] rounded text-[0.75rem]">data_cleaning.py</code> membersihkan 10 duplikat, 247 tanggal invalid, 193 harga kotor, 244 qty tidak valid. Output: <strong>1.806 baris bersih</strong> + kolom turunan.
+                                </div>
+                                <span class="inline-block bg-g-50 text-g-600 text-[0.62rem] font-bold py-[2px] px-2 rounded mt-1.5 border border-g-200">🧹 Pandas · NumPy · Regex</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 pb-6">
+                            <div class="flex flex-col items-center flex-shrink-0">
+                                <div class="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-g-400 to-g-500 flex items-center justify-center text-g-900 font-extrabold text-[0.78rem]">3</div>
+                                <div class="w-0.5 flex-1 bg-g-200 mt-1.5"></div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.88rem] mb-1" data-id="Analisis dengan SQL Server (T-SQL)" data-en="Analysis with SQL Server (T-SQL)">Analisis dengan SQL Server (T-SQL)</div>
+                                <div class="text-[#5a7a65] text-[0.8rem] leading-[1.65]" data-id="Data bersih diimpor ke SQL Server. 10 query analitik dibuat mencakup KPI ringkasan, tren MoM, ranking produk & salesperson, analisis YoY, dan kontribusi per wilayah." data-en="Clean data was imported into SQL Server. 10 analytical queries were written covering KPI summaries, MoM trends, product & salesperson rankings, YoY analysis, and regional contribution.">
+                                    Data bersih diimpor ke SQL Server. 10 query analitik dibuat mencakup KPI ringkasan, tren MoM, ranking produk & salesperson, analisis YoY, dan kontribusi per wilayah.
+                                </div>
+                                <span class="inline-block bg-g-50 text-g-600 text-[0.62rem] font-bold py-[2px] px-2 rounded mt-1.5 border border-g-200">🗄️ T-SQL · Window Functions · CTE · BULK INSERT</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center flex-shrink-0">
+                                <div class="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-g-400 to-g-500 flex items-center justify-center text-g-900 font-extrabold text-[0.78rem]">4</div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.88rem] mb-1" data-id="Visualisasi di Looker Studio" data-en="Visualization in Looker Studio">Visualisasi di Looker Studio</div>
+                                <div class="text-[#5a7a65] text-[0.8rem] leading-[1.65]" data-id="Dashboard interaktif di Google Looker Studio menampilkan 4 KPI tile, tren bulanan, distribusi kategori, top produk, heatmap wilayah, dan leaderboard salesperson." data-en="An interactive dashboard in Google Looker Studio displaying 4 KPI tiles, monthly trends, category distribution, top products, regional heatmap, and salesperson leaderboard.">
+                                    Dashboard interaktif di Google Looker Studio menampilkan 4 KPI tile, tren bulanan, distribusi kategori, top produk, heatmap wilayah, dan leaderboard salesperson.
+                                </div>
+                                <span class="inline-block bg-g-50 text-g-600 text-[0.62rem] font-bold py-[2px] px-2 rounded mt-1.5 border border-g-200">📊 Looker Studio · Charts · Filters · Slicers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Findings -->
+                <div class="bg-white rounded-2xl border-[1.5px] border-g-200 p-[clamp(16px,4vw,28px)] shadow-[0_2px_12px_rgba(20,83,45,0.05)]">
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-500 mb-2" data-id="Insight" data-en="Insight">Insight</span>
+                    <div class="font-serif sec-title text-g-900 mb-3.5" data-id="Key Findings" data-en="Key Findings">Key Findings</div>
+                    <div>
+                        <div class="flex gap-3 py-3.5 border-b border-g-100">
+                            <div class="w-[34px] h-[34px] min-w-[34px] bg-g-100 rounded-[9px] flex items-center justify-center text-base">💡</div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.85rem] mb-1" data-id="Laptop Pro X1 adalah produk unggulan" data-en="Laptop Pro X1 is the star product">Laptop Pro X1 adalah produk unggulan</div>
+                                <div class="text-[#4a6355] text-[0.8rem] leading-[1.65]" data-id="Menyumbang Rp 260,1 Miliar atau sekitar 31% dari total net sales, jauh melampaui produk lainnya. Strategi upsell produk ini sangat potensial untuk meningkatkan revenue." data-en="Contributing Rp 260.1 Billion — around 31% of total net sales — far surpassing other products. An upsell strategy for this product holds strong revenue growth potential.">
+                                    Menyumbang Rp 260,1 Miliar atau sekitar 31% dari total net sales, jauh melampaui produk lainnya. Strategi upsell produk ini sangat potensial untuk meningkatkan revenue.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 py-3.5 border-b border-g-100">
+                            <div class="w-[34px] h-[34px] min-w-[34px] bg-g-100 rounded-[9px] flex items-center justify-center text-base">📍</div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.85rem] mb-1" data-id="Jawa Barat + Jawa Timur = 42% transaksi" data-en="West Java + East Java = 42% of transactions">Jawa Barat + Jawa Timur = 42% transaksi</div>
+                                <div class="text-[#4a6355] text-[0.8rem] leading-[1.65]" data-id="Dua wilayah ini mendominasi volume order. Potensi ekspansi masih terbuka lebar di Kalimantan Timur dan Sulawesi Selatan yang baru berkontribusi ~9.5% masing-masing." data-en="These two regions dominate order volume. Significant expansion potential remains in East Kalimantan and South Sulawesi, each contributing only ~9.5%.">
+                                    Dua wilayah ini mendominasi volume order. Potensi ekspansi masih terbuka lebar di Kalimantan Timur dan Sulawesi Selatan yang baru berkontribusi ~9.5% masing-masing.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 py-3.5 border-b border-g-100">
+                            <div class="w-[34px] h-[34px] min-w-[34px] bg-g-100 rounded-[9px] flex items-center justify-center text-base">🔄</div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.85rem] mb-1" data-id="Online & Offline hampir seimbang (52% vs 48%)" data-en="Online & Offline nearly balanced (52% vs 48%)">Online & Offline hampir seimbang (52% vs 48%)</div>
+                                <div class="text-[#4a6355] text-[0.8rem] leading-[1.65]" data-id="Distribusi channel yang seimbang mengindikasikan strategi omnichannel yang baik. Investasi lebih pada channel online dapat mendorong pertumbuhan lebih efisien." data-en="The balanced channel distribution indicates a healthy omnichannel strategy. Further investment in the online channel could drive growth more efficiently.">
+                                    Distribusi channel yang seimbang mengindikasikan strategi omnichannel yang baik. Investasi lebih pada channel online dapat mendorong pertumbuhan lebih efisien.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 py-3.5">
+                            <div class="w-[34px] h-[34px] min-w-[34px] bg-g-100 rounded-[9px] flex items-center justify-center text-base">⚠️</div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.85rem] mb-1" data-id="Data mentah: 27.8% baris perlu pembersihan" data-en="Raw data: 27.8% of rows needed cleaning">Data mentah: 27.8% baris perlu pembersihan</div>
+                                <div class="text-[#4a6355] text-[0.8rem] leading-[1.65]" data-id="Dari 2.500 baris, 694 baris dieliminasi karena data kotor. Implementasi validasi data real-time di sistem point-of-sale dapat mencegah masalah kualitas data di masa depan." data-en="Of 2,500 raw rows, 694 were eliminated due to dirty data. Implementing real-time validation at the point-of-sale system could prevent data quality issues going forward.">
+                                    Dari 2.500 baris, 694 baris dieliminasi karena data kotor. Implementasi validasi data real-time di sistem point-of-sale dapat mencegah masalah kualitas data di masa depan.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /Main Col -->
+
+            <!-- Right: Sidebar -->
+            <div class="sidebar-sticky flex flex-col gap-5 order-2">
+                <div class="bg-white rounded-2xl border-[1.5px] border-g-200 p-[clamp(16px,4vw,28px)] shadow-[0_2px_12px_rgba(20,83,45,0.05)]">
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-500 mb-2" data-id="Info Project" data-en="Project Info">Info Project</span>
+                    <ul class="list-none">
+                        <li class="flex justify-between items-center py-[9px] border-b border-g-100 text-[0.82rem] gap-3">
+                            <span class="text-[#6b9478] font-medium" data-id="Status" data-en="Status">Status</span>
+                            <span class="font-semibold text-right" style="color:#16a34a">✅ <span data-id="Selesai" data-en="Completed">Selesai</span></span>
+                        </li>
+                        <li class="flex justify-between items-center py-[9px] border-b border-g-100 text-[0.82rem] gap-3">
+                            <span class="text-[#6b9478] font-medium" data-id="Tahun" data-en="Year">Tahun</span>
+                            <span class="text-g-800 font-semibold">2025</span>
+                        </li>
+                        <li class="flex justify-between items-center py-[9px] border-b border-g-100 text-[0.82rem] gap-3">
+                            <span class="text-[#6b9478] font-medium" data-id="Kategori" data-en="Category">Kategori</span>
+                            <span class="text-g-800 font-semibold" data-id="Dashboard" data-en="Dashboard">Dashboard</span>
+                        </li>
+                        <li class="flex justify-between items-center py-[9px] border-b border-g-100 text-[0.82rem] gap-3">
+                            <span class="text-[#6b9478] font-medium" data-id="Dataset" data-en="Dataset">Dataset</span>
+                            <span class="text-g-800 font-semibold">2.500 rows (raw)</span>
+                        </li>
+                        <li class="flex justify-between items-center py-[9px] border-b border-g-100 text-[0.82rem] gap-3">
+                            <span class="text-[#6b9478] font-medium" data-id="Clean Data" data-en="Clean Data">Clean Data</span>
+                            <span class="text-g-800 font-semibold">1.806 rows</span>
+                        </li>
+                        <li class="flex justify-between items-center py-[9px] text-[0.82rem] gap-3">
+                            <span class="text-[#6b9478] font-medium" data-id="Reduction" data-en="Reduction">Reduction</span>
+                            <span class="text-g-800 font-semibold">27.8%</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-2xl border-[1.5px] border-g-200 p-[clamp(16px,4vw,28px)] shadow-[0_2px_12px_rgba(20,83,45,0.05)]">
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-500 mb-2">Tech Stack</span>
+                    <div class="flex flex-col gap-[9px] mt-1">
+                        <div class="flex items-center gap-[11px] p-2.5 bg-g-50 rounded-[10px]"><span class="text-[1.3rem]">🐍</span><div><div class="font-bold text-[0.8rem] text-g-800">Python</div><div class="text-[0.68rem] text-[#6b9478]">Pandas, NumPy, Regex</div></div></div>
+                        <div class="flex items-center gap-[11px] p-2.5 bg-g-50 rounded-[10px]"><span class="text-[1.3rem]">🗄️</span><div><div class="font-bold text-[0.8rem] text-g-800">SQL Server</div><div class="text-[0.68rem] text-[#6b9478]">T-SQL, SSMS, Window Functions</div></div></div>
+                        <div class="flex items-center gap-[11px] p-2.5 bg-g-50 rounded-[10px]"><span class="text-[1.3rem]">📊</span><div><div class="font-bold text-[0.8rem] text-g-800">Looker Studio</div><div class="text-[0.68rem] text-[#6b9478]">Charts, Filters, KPI Tiles</div></div></div>
+                        <div class="flex items-center gap-[11px] p-2.5 bg-g-50 rounded-[10px]"><span class="text-[1.3rem]">📁</span><div><div class="font-bold text-[0.8rem] text-g-800">CSV / Excel</div><div class="text-[0.68rem] text-[#6b9478]" data-id="Input/Output format" data-en="Input/Output format">Input/Output format</div></div></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border-[1.5px] border-g-200 p-[clamp(16px,4vw,28px)] shadow-[0_2px_12px_rgba(20,83,45,0.05)]">
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-500 mb-2" data-id="Download Files" data-en="Download Files">Download Files</span>
+                    <div class="flex flex-col gap-[9px] mt-1">
+                        <a href="dataset_raw/sales_data_raw.csv" download class="flex items-center gap-2.5 py-2.5 px-[13px] bg-g-50 border-[1.5px] border-g-200 rounded-[10px] no-underline hover:bg-g-100 transition-colors">
+                            <span class="text-[1.2rem]">📥</span>
+                            <div><div class="font-bold text-[0.78rem] text-g-800">sales_data_raw.csv</div><div class="text-[0.65rem] text-[#6b9478]" data-id="Dataset mentah · 2.500 baris" data-en="Raw dataset · 2,500 rows">Dataset mentah · 2.500 baris</div></div>
+                        </a>
+                        <a href="dataset_clean/sales_data_clean.csv" download class="flex items-center gap-2.5 py-2.5 px-[13px] bg-g-50 border-[1.5px] border-g-200 rounded-[10px] no-underline hover:bg-g-100 transition-colors">
+                            <span class="text-[1.2rem]">✅</span>
+                            <div><div class="font-bold text-[0.78rem] text-g-800">sales_data_clean.csv</div><div class="text-[0.65rem] text-[#6b9478]" data-id="Data bersih · 1.806 baris" data-en="Clean data · 1,806 rows">Data bersih · 1.806 baris</div></div>
+                        </a>
+                        <a href="python_cleaning/data_cleaning.py" download class="flex items-center gap-2.5 py-2.5 px-[13px] bg-g-50 border-[1.5px] border-g-200 rounded-[10px] no-underline hover:bg-g-100 transition-colors">
+                            <span class="text-[1.2rem]">🐍</span>
+                            <div><div class="font-bold text-[0.78rem] text-g-800">data_cleaning.py</div><div class="text-[0.65rem] text-[#6b9478]" data-id="Script Python cleaning" data-en="Python cleaning script">Script Python cleaning</div></div>
+                        </a>
+                        <a href="sql_analysis/sales_analysis.sql" download class="flex items-center gap-2.5 py-2.5 px-[13px] bg-g-50 border-[1.5px] border-g-200 rounded-[10px] no-underline hover:bg-g-100 transition-colors">
+                            <span class="text-[1.2rem]">🗄️</span>
+                            <div><div class="font-bold text-[0.78rem] text-g-800">sales_analysis.sql</div><div class="text-[0.65rem] text-[#6b9478]" data-id="Query SQL Server · 10 analisis" data-en="SQL Server queries · 10 analyses">Query SQL Server · 10 analisis</div></div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="stats-dark border border-g-700 rounded-2xl p-[clamp(16px,4vw,28px)]">
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-400 mb-2" data-id="Statistik Data" data-en="Data Statistics">Statistik Data</span>
+                    <div class="grid grid-cols-2 gap-2.5 mt-2.5">
+                        <div class="text-center bg-white/[0.08] rounded-[9px] p-[11px_8px]">
+                            <div class="stat-val text-g-400 font-extrabold font-serif">835,8M</div>
+                            <div class="text-[#86efac] text-[0.6rem] mt-[3px]">Total Net Sales (Rp)</div>
+                        </div>
+                        <div class="text-center bg-white/[0.08] rounded-[9px] p-[11px_8px]">
+                            <div class="stat-val text-g-400 font-extrabold font-serif">1.806</div>
+                            <div class="text-[#86efac] text-[0.6rem] mt-[3px]" data-id="Clean Transactions" data-en="Clean Transactions">Clean Transactions</div>
+                        </div>
+                        <div class="text-center bg-white/[0.08] rounded-[9px] p-[11px_8px]">
+                            <div class="stat-val text-g-400 font-extrabold font-serif">13,6%</div>
+                            <div class="text-[#86efac] text-[0.6rem] mt-[3px]" data-id="Avg Discount Rate" data-en="Avg Discount Rate">Avg Discount Rate</div>
+                        </div>
+                        <div class="text-center bg-white/[0.08] rounded-[9px] p-[11px_8px]">
+                            <div class="stat-val text-g-400 font-extrabold font-serif" data-id="3 Tahun" data-en="3 Years">3 Tahun</div>
+                            <div class="text-[#86efac] text-[0.6rem] mt-[3px]" data-id="Data Coverage" data-en="Data Coverage">Data Coverage</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === FOOTER === -->
+    <footer class="bg-green-900 text-green-100 py-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <p class="text-2xl font-bold mb-2" style="font-family: 'DM Serif Display', serif;">Ilham Hafizt<span class="text-green-400">.</span></p>
+                    <p class="text-green-300 text-sm leading-relaxed" data-en="Data Analyst turning numbers into meaningful stories." data-id="Data Analyst yang bertujuan mengubah angka menjadi cerita bermakna.">
+                        Data Analyst turning numbers into meaningful stories.
+                    </p>
+                    <div class="flex gap-3 mt-4">
+                        <a href="https://github.com/ilhamhafizt" target="_blank" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-g-400 hover:bg-g-400 hover:text-g-900 transition-all duration-200 no-underline">
+                            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ilham-hafizt-50a99a394/" target="_blank" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-g-400 hover:bg-g-400 hover:text-g-900 transition-all duration-200 no-underline">
+                            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="mailto:ilhamhafizt9@gmail.com" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-g-400 hover:bg-g-400 hover:text-g-900 transition-all duration-200 no-underline">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <p class="font-semibold mb-3 text-green-200" data-en="Navigation" data-id="Navigasi">Navigation</p>
+                    <ul class="space-y-2 text-sm text-green-300">
+                        <li><a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/#about" class="hover:text-green-400 transition-colors" data-en="About" data-id="Tentang" target="_blank">About</a></li>
+                        <li><a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/#skills" class="hover:text-green-400 transition-colors" data-en="Skills" data-id="Skill" target="_blank">Skills</a></li>
+                        <li><a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/#education" class="hover:text-green-400 transition-colors" data-en="Education" data-id="Pendidikan" target="_blank">Education</a></li>
+                        <li><a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/#projects" class="hover:text-green-400 transition-colors" data-en="Projects" data-id="Proyek" target="_blank">Projects</a></li>
+                        <li><a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/#contact" class="hover:text-green-400 transition-colors" data-en="Contact" data-id="Kontak" target="_blank">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <p class="font-semibold mb-3 text-green-200" data-en="Contact" data-id="Kontak">Contact</p>
+                    <ul class="space-y-2 text-sm text-green-300">
+                        <li>ilhamhafizt9@gmail.com</a></li>
+                        <li>+62 896-5330-6722</li>
+                        <li data-en="Pontianak, West Kalimantan, Indonesia" data-id="Pontianak, Kalimantan Barat, Indonesia">Pontianak, West Kalimantan, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-green-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-green-400">
+                <p>© 2026 Ilham Hafizt.</p>
+                <p>All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-g-500 text-white shadow-lg flex items-center justify-center hover:bg-g-600 transition-colors duration-200" aria-label="Back to top">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <script src="js/project1.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; }
+.cc { color: #6b7280; } .ck { color: #93c5fd; }
+.cf { color: #4ade80; } 
+.cs { color: #fcd34d; } 
+.cn { color: #f9a8d4; }
+.db-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chart-wrap  { position: relative; height: clamp(110px, 18vw, 140px); width: 100%; }
+
+@media (min-width: 860px) { .sidebar-sticky { position: sticky; top: 70px; } }
+
+#navbar {
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+#navbar.scrolled {
+    background: rgba(240, 253, 244, 0.92);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 20px rgba(74,222,128,.15);
+}
+
+.hero-gradient { background: linear-gradient(135deg, #e8f8ed 0%, #f0fdf4 60%, #dcfce7 100%); }
+.stats-dark    { background: linear-gradient(135deg, #14532d, #166534); }
+.code-block    { overflow-x: auto; -webkit-overflow-scrolling: touch; font-family: 'Courier New', monospace; font-size: clamp(0.68rem,1.5vw,0.78rem); line-height: 1.75; }
+.hero-title    { font-size: clamp(1.8rem, 6vw, 3.2rem); }
+.kpi-val       { font-size: clamp(0.85rem, 2.5vw, 1.1rem); }
+.sec-title     { font-size: clamp(1.3rem, 3vw, 1.75rem); }
+.stat-val      { font-size: clamp(1rem, 3vw, 1.25rem); }
+.hero-desc     { font-size: clamp(0.85rem, 2vw, 0.95rem); }
+
+/* Back to top */
+#backToTop { opacity:0; pointer-events:none; transition: opacity .3s ease, transform .3s ease; transform: translateY(10px); }
+#backToTop.show { opacity:1; pointer-events:auto; transform: translateY(0); }
+
+/* Lang btn */
+.lang-btn { color: #4b7c59; background: transparent; }
+.lang-btn.active { background: linear-gradient(135deg, #4ade80, #22c55e); color: #14532d; }
+
+/* Scroll Progress */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+    width: 0;
+    z-index: 9999;
+    transition: width .1s;
+}
