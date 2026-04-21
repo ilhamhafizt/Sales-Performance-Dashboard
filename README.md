@@ -111,13 +111,13 @@ To view:
 1. Clone repository:
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/ilhamhafizt/Sales-Performance-Dashboard
 ```
 
 2. Open project:
 
 ```bash
-cd your-repo-name
+cd sales-performance-dashboard
 ```
 
 3. Run dashboard:
