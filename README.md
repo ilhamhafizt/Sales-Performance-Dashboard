@@ -24,9 +24,9 @@ The project includes:
 ## 📂 Project Structure
 
 ```
-project1/
+sales-performance-dashboard/
 │
-├── project1.html              # Main dashboard
+├── index.html              # Main dashboard
 ├── css/
 │   └── project1.css
 ├── js/
@@ -102,7 +102,7 @@ To view:
 
 ## 🚀 Live Demo
 
-
+https://ilhamhafizt.github.io/Sales-Performance-Dashboard/
 
 ---
 
@@ -122,7 +122,7 @@ cd sales-performance-dashboard
 
 3. Run dashboard:
 
-* Open `project1.html` in browser
+* Open `index.html` in browser
 
 ---
 
